@@ -1,6 +1,10 @@
 <?php
 
     require 'includes/database.php';
+    require 'includes/auth.php';
+    
+    session_start();
+
     $conn = getDB();
 
     $sql = "SELECT * FROM article;";
@@ -18,7 +22,16 @@
 ?>
 <?php require 'includes/header.php'; ?>
 
-<a href="new_article.php">New article</a>
+<?php var_dump($_SESSION); ?>
+
+<?php if(isLoggedIn()): ?>
+    <p>You are logged in. <a href="logout.php">Logout</a></a></p>
+    <p><a href="new_article.php">New article</a></p>
+<?php else: ?>
+    <p>You are logged out <a href="login.php">Login</a></a></p>     
+<?php endif; ?>    
+
+
             <?php if(empty($articles)): ?>
                 <p>No articles found</p>
             <?php else: ?>    
