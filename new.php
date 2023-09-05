@@ -1,30 +1,24 @@
 <?php
+    // require 'classes/Article.php';
+    // require 'classes/Database.php';
+    // require 'classes/Auth.php';
 
-    require 'includes/database.php';
-    require 'includes/auth.php';
+    require 'includes/init.php';
     
-    session_start();
+    // session_start();
 
-    $conn = getDB();
+    // $db = new Database();
+    // $conn = $db->getConn();
+    $conn = require 'includes/db.php';
 
-    $sql = "SELECT * FROM article;";
-    //write the sql query and store it in a variable sql
-
-    $result = mysqli_query($conn,$sql);
-    //run the query using mysqli_query function and pass the conn and sql variables to it and store the result into a result variable
-
-    if($result === false){ //check if the result variable does contain some vale if no then throw the mysqli_error($conn)
-        echo mysqli_error($conn);
-    } else {
-        $articles = mysqli_fetch_all($result,MYSQLI_ASSOC); //else fetch all the records using mysqli_fetch_all($result) and store the resulting array into a variable called articles
-    }
+    $articles = Article::getAll($conn);
 
 ?>
 <?php require 'includes/header.php'; ?>
 
-<?php var_dump($_SESSION); ?>
+<!-- <?php var_dump($_SESSION); ?> -->
 
-<?php if(isLoggedIn()): ?>
+<?php if(Auth::isLoggedIn()): ?>
     <p>You are logged in. <a href="logout.php">Logout</a></a></p>
     <p><a href="new_article.php">New article</a></p>
 <?php else: ?>
@@ -35,7 +29,7 @@
             <?php if(empty($articles)): ?>
                 <p>No articles found</p>
             <?php else: ?>    
-            <ul>
+            <ul id="index">
                 <?php foreach ($articles as $article): ?>
                     <li>
                         <article>

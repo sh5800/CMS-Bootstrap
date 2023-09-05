@@ -1,6 +1,6 @@
-<?php if(!empty($errors)): ?>
+<?php if(!empty($article->errors)): ?>
     <ul>
-        <?php foreach ($errors as $error): ?>
+        <?php foreach ($article->errors as $error): ?>
             <li><?= $error ?></li>
         <?php endforeach; ?>    
     </ul>
@@ -9,22 +9,22 @@
 
 <form method="post">
 
-    <div>
-         <label for="title">Title</label>
-         <input name="title" id="title" placeholder="Article title" value=<?= htmlspecialchars($title);?>>
+    <div class="mb-3">
+         <label for="title" class="form-label">Title</label>
+         <input name="title" id="title" placeholder="Article title" class="form-control" value=<?= htmlspecialchars($article->title);?> >
     </div>
 
-    <div>
-        <label for="content">Content</label>
-        <textarea name="content" id="content" cols="40" rows="4" placeholder="Article content"><?= htmlspecialchars($content);?></textarea>
+    <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <textarea name="content" id="content" cols="40" rows="4" placeholder="Article content" class="form-control"><?= htmlspecialchars($article->content);?></textarea>
     </div>
 
-    <div>
-        <label for="published_at">Publication date and time</label>
-        <input type="datetime-local" name="published_at" id="published_at" value="<?= htmlspecialchars($published_at);?>">
+    <div class="mb-3">
+        <label for="published_at" class="form-label">Publication date and time</label>
+        <input type="datetime-local" name="published_at" id="published_at" value="<?= htmlspecialchars($article->published_at);?>" class="form-control">
     </div>
    
-    <button>Save</button>
+    <button class="btn btn-primary">Save</button>
    
 
 </form>

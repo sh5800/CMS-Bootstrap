@@ -1,8 +1,10 @@
 <?php
 
-require 'includes/url.php';
+// require 'classes/Url.php';
 
-session_start();
+// session_start();
+
+require 'includes/init.php';
 
 // Unset all of the session variables.
 $_SESSION = array();
@@ -21,5 +23,5 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy();
 
-redirect('/new.php');
+Url::redirect('/new.php');
 ?>
